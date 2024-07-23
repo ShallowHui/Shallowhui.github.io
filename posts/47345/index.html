@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Maven仓库详细配置 | zunhuier's blog</title><meta name="keywords" content="Maven"><meta name="author" content="zunhuier"><meta name="copyright" content="zunhuier"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="介绍如何配置Maven的仓库。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven仓库详细配置">
+<meta property="og:url" content="https://zunhuier.top/posts/47345/index.html">
+<meta property="og:site_name" content="zunhuier&#39;s blog">
+<meta property="og:description" content="介绍如何配置Maven的仓库。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/maven.png">
+<meta property="article:published_time" content="2022-11-26T08:35:53.000Z">
+<meta property="article:modified_time" content="2024-07-23T10:03:00.744Z">
+<meta property="article:author" content="zunhuier">
+<meta property="article:tag" content="Maven">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/maven.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://zunhuier.top/posts/47345/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-j854Y0rH6C"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-right"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Maven仓库详细配置',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-23 18:03:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于&amp;留言</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/maven.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zunhuier's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于&amp;留言</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Maven仓库详细配置</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2022-11-26T08:35:53.000Z" title="发表于 2022-11-26 16:35:53">2022-11-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Maven仓库详细配置"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/47345/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Maven仓库"><a href="#Maven仓库" class="headerlink" title="Maven仓库"></a>Maven仓库</h2><p>Maven是一个软件项目的依赖管理和构建工具。</p>
+<p>Maven可以根据需要，从一个仓库中下载依赖到本地上。Maven的仓库分为两种类型：</p>
+<ul>
+<li>本地仓库：本地仓库是本地机器上的一个目录，默认是<code>$&#123;user.home&#125;/.m2/repository</code>。Maven下载依赖的时候是先去本地仓库找有没有这个依赖，没有才去互联网上下载。</li>
+</ul>
+<p>可以在Maven的全局配置文件<code>settings.xml</code>中进行配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">	<span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>&#123;custom_path&#125;<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>远程仓库：Maven在本地仓库上找不到依赖时，就会去远程仓库上下载依赖并保存到本地仓库中。</li>
+</ul>
+<p>互联网上有很多Maven仓库是公开给人下载依赖的，比如阿里云就提供了很多仓库的镜像地址和源地址：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/shallowhui/cdn/picgo/maven_repo.png" alt="repo"></p>
+<p>但是这么多远程仓库，Maven怎么知道去哪个仓库下载依赖呢？</p>
+<p>在Maven中，有一个“超级POM”(<a target="_blank" rel="noopener" href="https://maven.apache.org/ref/3.8.6/maven-model-builder/super-pom.html">Super POM</a>)，其它Maven项目默认都是继承这个POM的，其中有这么一个配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>central<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>Central Repository<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">url</span>&gt;</span>https://repo.maven.apache.org/maven2<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">layout</span>&gt;</span>default<span class="tag">&lt;/<span class="name">layout</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，Maven给所有项目配置了一个默认的远程仓库，id为<code>central</code>，所以这个官方的仓库也被称为<code>中央仓库</code>。</p>
+<p>Maven默认从中央仓库下载依赖。</p>
+<h2 id="给中央仓库设置镜像"><a href="#给中央仓库设置镜像" class="headerlink" title="给中央仓库设置镜像"></a>给中央仓库设置镜像</h2><p>由于众所周知的原因，从中央仓库下载依赖可能下载得会很慢甚至失败，所以需要为中央仓库设置一个镜像仓库，相当于代理了中央仓库，以后会直接从镜像仓库下载中央仓库的依赖，而不会去中央仓库下载了。</p>
+<p>在Maven的全局配置文件<code>settings.xml</code>中配置如下阿里云镜像：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">	<span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyunmaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>阿里云公共仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意<code>&lt;mirrorOf&gt;</code>的值必须跟中央仓库的id一样为<code>central</code>，这样才能设置为中央仓库的镜像。</p>
+<p><code>&lt;mirrorOf&gt;</code>就是给一个远程仓库设置镜像的关键。当然，<code>&lt;mirrorOf&gt;</code>的值也可以设置得跟远程仓库的id不一样，比如设置成<code>*</code>，代表匹配任意远程仓库的id，这样一来，所有远程仓库的依赖都会从这个镜像下载。具体参考如下：</p>
+<p><a target="_blank" rel="noopener" href="https://maven.apache.org/guides/mini/guide-mirror-settings.html">mirror settings</a></p>
+<p><strong>给中央仓库或者其它一个远程仓库，即单个仓库，设置多个镜像是没有用的，Maven只会简单地找到第一个匹配这个远程仓库id的镜像。</strong></p>
+<h2 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h2><p>一个依赖，可能在中央仓库中没有，在其它远程仓库中才有。或者自己搭建了一个Maven仓库，专门用来存储自己项目的制品(<code>Artifact</code>)供自己下载使用且不公开。</p>
+<p>基于种种原因，需要为Maven添加远程仓库，有两种添加方式：</p>
+<ul>
+<li>在项目的<code>pom.xml</code>文件中添加，只对当前项目生效：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">	<span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>jcenter<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>jcenter仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://jcenter.bintray.com/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>google<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>谷歌仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.google.com/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在Maven的全局配置文件<code>settings.xml</code>中添加，对所有项目生效：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">	<span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>repo<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span> <span class="comment">&lt;!-- 默认激活这个profile --&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">id</span>&gt;</span>jcenter<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">name</span>&gt;</span>jcenter仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://jcenter.bintray.com/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">				<span class="comment">&lt;!-- 启用发布版本 --&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">releases</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">releases</span>&gt;</span></span><br><span class="line">				<span class="comment">&lt;!-- 启用快照版本，允许下载version带-SNAPSHOT后缀的依赖 --&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">					<span class="comment">&lt;!-- 更新策略，每次构建项目都会去Nexus下载最新快照版本的依赖 --&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">updatePolicy</span>&gt;</span>always<span class="tag">&lt;/<span class="name">updatePolicy</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">id</span>&gt;</span>google<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">name</span>&gt;</span>谷歌仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.google.com/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>当Maven在一个远程仓库或者这个远程仓库的镜像中(如果这个仓库有匹配的镜像的话)找不到某个依赖时，就会去另一个远程仓库中找。如果配置的所有远程仓库都找不到，Maven就会报错。</strong></p>
+<h2 id="上传制品到Maven仓库"><a href="#上传制品到Maven仓库" class="headerlink" title="上传制品到Maven仓库"></a>上传制品到Maven仓库</h2><p>如果想把我们构建完项目后得到的制品(通常是一个jar包)，共享给其他人，让别人可以在项目中依赖并下载使用，就需要把我们的制品上传到Maven仓库中，有如下两种方式可以配置上传到哪个Maven仓库中：</p>
+<ul>
+<li>在项目的<code>pom.xml</code>文件中配置，只对当前项目生效：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">	<span class="tag">&lt;<span class="name">distributionManagement</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>正式版本发布仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://repo_url/repository/releases/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">snapshotRepository</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">name</span>&gt;</span>快照版本发布仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://repo_url/repository/snapshots/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">snapshotRepository</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">distributionManagement</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在Maven的全局配置文件<code>settings.xml</code>中配置，对所有项目生效且覆盖项目自身的配置：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profiles</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">	<span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>upload<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 正式版本发布仓库 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">altReleaseDeploymentRepository</span>&gt;</span>maven-releases::default::http://repo_url/repository/maven-releases/<span class="tag">&lt;/<span class="name">altReleaseDeploymentRepository</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 快照版本发布仓库 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">altSnapshotDeploymentRepository</span>&gt;</span>maven-snapshots::default::http://repo_url/repository/maven-snapshots<span class="tag">&lt;/<span class="name">altSnapshotDeploymentRepository</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">profiles</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>&lt;altReleaseDeploymentRepository&gt;</code>这里的写法是：<code>id::layout::url</code>。</p>
+</blockquote>
+<p>注意，如果要把制品上传到快照版本发布仓库，那项目的GAV坐标中的<code>version</code>必须带有<code>-SHAPSHOT</code>后缀，正式版本发布仓库倒是没有什么限制。</p>
+<p>另外，如果Maven仓库的管理员对仓库设置了权限保护，那么上传制品的时候就需要验证，可以在Maven的全局配置文件<code>settings.xml</code>中添加如下配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servers</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">	<span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">username</span>&gt;</span>...<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">password</span>&gt;</span>...<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span>&gt;</span>maven-snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">username</span>&gt;</span>...<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">password</span>&gt;</span>...<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">servers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意，<code>&lt;server&gt;</code>的<code>id</code>必须和上面两种配置方法中的仓库id一致，例如，<code>id::layout::url</code>中的id必须和<code>&lt;server&gt;</code>的id一致。</strong></p>
+<h2 id="通用做法"><a href="#通用做法" class="headerlink" title="通用做法"></a>通用做法</h2><p>在企业或者大型组织中，关于如何管理Maven仓库，一种比较简单通用的做法是：</p>
+<ol>
+<li><p>以上关于仓库的配置均在<code>settings.xml</code>文件中配置，而不是<code>pom.xml</code>文件。</p>
+</li>
+<li><p>集中管理<code>settings.xml</code>文件，并通过自动化分发它们。</p>
+</li>
+</ol>
+<p>具体参考：<a target="_blank" rel="noopener" href="https://maven.apache.org/guides/mini/guide-large-scale-centralized-deployments.html">Guide to Large Scale Centralized Deployments</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://zunhuier.top">zunhuier</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zunhuier.top/posts/47345/">https://zunhuier.top/posts/47345/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zunhuier.top" target="_blank">zunhuier's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Maven/">Maven</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/maven.png" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/pay/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/pay/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/pay/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/pay/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/16707/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn/picgo/grafana.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">基于Grafana的可视化监控搭建</div></div></a></div><div class="next-post pull-right"><a href="/posts/46701/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn/picgo/devops.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">DevOps简介</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/37716/" title="Maven基础"><img class="cover" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/maven.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-29</div><div class="title">Maven基础</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven%E4%BB%93%E5%BA%93"><span class="toc-number">1.</span> <span class="toc-text">Maven仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%99%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93%E8%AE%BE%E7%BD%AE%E9%95%9C%E5%83%8F"><span class="toc-number">2.</span> <span class="toc-text">给中央仓库设置镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">3.</span> <span class="toc-text">添加远程仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E5%88%B6%E5%93%81%E5%88%B0Maven%E4%BB%93%E5%BA%93"><span class="toc-number">4.</span> <span class="toc-text">上传制品到Maven仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%81%9A%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">通用做法</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: black"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By zunhuier</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://zunhuier.top">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://ttz.zeabur.app',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://ttz.zeabur.app',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="2278581987" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

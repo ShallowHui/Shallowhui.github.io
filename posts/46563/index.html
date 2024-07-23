@@ -1,0 +1,567 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>正则表达式 | zunhuier's blog</title><meta name="keywords" content="正则表达式"><meta name="author" content="zunhuier"><meta name="copyright" content="zunhuier"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="正则表达式的功能十分强大，可以让我们在编程中省去许多麻烦，无论是前端或是后端程序员都应该掌握这个工具，这篇文章系统地讲解了下正则表达式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式">
+<meta property="og:url" content="https://zunhuier.top/posts/46563/index.html">
+<meta property="og:site_name" content="zunhuier&#39;s blog">
+<meta property="og:description" content="正则表达式的功能十分强大，可以让我们在编程中省去许多麻烦，无论是前端或是后端程序员都应该掌握这个工具，这篇文章系统地讲解了下正则表达式。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/re.jpg">
+<meta property="article:published_time" content="2020-04-11T05:43:29.000Z">
+<meta property="article:modified_time" content="2024-07-23T10:03:00.744Z">
+<meta property="article:author" content="zunhuier">
+<meta property="article:tag" content="正则表达式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/re.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://zunhuier.top/posts/46563/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-j854Y0rH6C"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-right"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '正则表达式',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-23 18:03:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于&amp;留言</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/re.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zunhuier's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于&amp;留言</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">正则表达式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-04-11T05:43:29.000Z" title="发表于 2020-04-11 13:43:29">2020-04-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="正则表达式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/46563/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>字符串是我们编程时涉及到的最多的一种数据结构，对字符串进行操作的需求几乎无处不在，比如我们使用<a href="https://zunhuier.top/posts/19580/">爬虫</a>时需要在一大片的字符串中定位到我们所需要的数据以便提取数据；打开一个字符流，查找其中特定的内容；对用户输入进来的内容进行检验，防止SQL注入。</p>
+<p>正则表达式就是一种用来匹配字符串的强大武器，它的设计思想就是用一种描述性的语言给字符串定义了一个规则，凡是满足这个规则的字符串，我们就说它与这个正则表达式匹配了，否则就是不匹配的。</p>
+<p>许多编程语言都支持正则表达式，不同编程语言对正则表达式的支持也有些许不同，这里我用Java语言来实现正则表达式的功能。</p>
+<p>需要说明的是，正则表达式的功能非常强大，特性也非常丰富，一篇博客是讲不完的，只能入门正则表达式。如果需要经常与正则表达式打交道，最好还是常备一本正则表达式的参考书。是的，关于正则表达式可以写一本书出来。</p>
+<h2 id="Java中支持正则表达式的类库"><a href="#Java中支持正则表达式的类库" class="headerlink" title="Java中支持正则表达式的类库"></a>Java中支持正则表达式的类库</h2><p>在java中，String类本身就提供了一个<code>matches</code>方法用来进行正则表达式的匹配，如下面的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">        System.out.println(str.matches(<span class="string">&quot;abc&quot;</span>)); <span class="comment">//matches方法接收一个正则表达式作为参数，返回一个关于匹配结果的布尔值，true表示成功，false表示失败</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<pre><code>true
+</code></pre><ul>
+<li>matches方法进行的是全文本匹配，后文会讲到。</li>
+</ul>
+<p>Java还提供了一个支持正则表达式的类库：<code>java.util.regex</code>，其中主要包括三个类：</p>
+<ol>
+<li><p>Pattern类：pattern类的对象是一个正则表达式的编译表示。Pattern类没有公共构造方法。要创建一个Pattern对象，你必须首先调用其公共静态编译方法，它返回一个Pattern对象。该方法接受一个正则表达式作为它的第一个参数。</p>
+</li>
+<li><p>Matcher类：matcher类的对象是对输入字符串进行解释和匹配操作的引擎。与Pattern类一样，matcher类也没有公共构造方法。你需要调用Pattern对象的matcher方法来获得一个Matcher对象。</p>
+</li>
+<li><p>PatternSyntaxException类：是一个非强制异常类，它表示一个正则表达式模式中的语法错误。</p>
+</li>
+</ol>
+<p>下面看一个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.*; <span class="comment">//导入类库</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">context</span> <span class="operator">=</span> <span class="string">&quot;abc-123&quot;</span>; <span class="comment">//待匹配的字符串</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;\\w.*\\d&quot;</span>; <span class="comment">//正则表达式字符串，注意在java字符串中`\`需要转义</span></span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(re); <span class="comment">//调用Pattern类的静态方法，编译正则表达式，获得pattern类对象</span></span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(context); <span class="comment">//获得匹配器对象</span></span><br><span class="line">        System.out.println(m.matches());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Matcher类的对象的matches方法也是进行全文本匹配，返回一个布尔值。除此之外，匹配器对象还有需要重复调用以匹配内容符合规则的全部子串的find方法，以及提取分组匹配中内容符合规则的子串的group方法，这些在下面都会讲到。</li>
+</ul>
+<p>结果：</p>
+<pre><code>true
+</code></pre><ul>
+<li>再重申一遍，由于正则表达式也是一个字符串，所以正则表达式中的特殊字符，如’\‘需要在java字符串中转义表示。\w、\d、*，等等是正则表达式的元字符，后文会讲到它们的作用。</li>
+</ul>
+<p><strong>下面开始讲解正则表达式</strong></p>
+<h2 id="正则表达式是一个字符串"><a href="#正则表达式是一个字符串" class="headerlink" title="正则表达式是一个字符串"></a>正则表达式是一个字符串</h2><blockquote>
+<p><strong>从形式上看，正则表达式也是一个字符串，是一个描述规则的字符串，它规定了另一个符合这个规则的字符串中应该有什么内容，有什么样的内容，或者说另一个字符串中的某个子串的内容符合这个规则。使用正则表达式，就可以去匹配出一个字符串中的特定内容。</strong></p>
+</blockquote>
+<h3 id="全文本匹配"><a href="#全文本匹配" class="headerlink" title="全文本匹配"></a>全文本匹配</h3><p>我们除了需要去匹配一个字符串中是否有特定内容，有时还希望去匹配整个字符串或者说文本（文本就是一行一行的字符串，有换行，但本质上就是一个字符串），看它是否符合我们正则表达式的规则，这时就需要对字符串进行全文本匹配。</p>
+<p>正则表达式中有两个特殊的定界符：<code>^</code>和<code>$</code>。</p>
+<p>^表示字符串开始的位置，$表示字符串结束的位置，如”^a”表示字符串必须以字符’a’开头，”9$”表示字符串必须以字符’9’结束。</p>
+<p>举个例子，我们假设区号+电话号是这样一种形式：123-12345678，即满足这样一个规则：必须以3个数字开头，中间以一个英文的破折号’-‘分隔，再以8个数字结尾。我们可以写出正则表达式如下：</p>
+<pre><code>^\d&#123;3&#125;-\d&#123;8&#125;$
+</code></pre><ul>
+<li>关于这个正则表达式的元字符和限定符下面会讲。</li>
+</ul>
+<p>凡是用这个正则表达式去匹配成功的字符串，我们就可以认为它是合规的电话号码。如”110-11079117”是合规的，”a110-12345678”、”110-12345678a”、”110+12345678”、”110-123456789”等等都是不合规的。</p>
+<p>注意，java中的matches方法就是进行全文本匹配，不用再加这两个定界符了（单独的写全文本匹配的正则表达式才需要加），所以用matches方法进行匹配的字符串必须整体满足正则表达式的规则才能匹配成功。</p>
+<h3 id="精确匹配"><a href="#精确匹配" class="headerlink" title="精确匹配"></a>精确匹配</h3><p>比如我们有一个字符串：<code>&quot;I&#39;am java, I love java.&quot;</code>，想要知道里面有没有<code>java</code>这个内容或者说子串，我们可以这样写java代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String context=<span class="string">&quot;I&#x27;am java, I love java.&quot;</span>; <span class="comment">//待匹配的字符串</span></span><br><span class="line"><span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;java&quot;</span>; <span class="comment">//正则表达式字符串</span></span><br><span class="line"><span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(re);</span><br><span class="line"><span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(context);</span><br><span class="line"><span class="keyword">while</span>(m.find())&#123;</span><br><span class="line">    System.out.print(<span class="string">&quot;起始位置：&quot;</span>+m.start()); <span class="comment">//start方法返回符合规则的子串的起始位置，注意字符串中的序号以0开始计数</span></span><br><span class="line">    System.out.print(<span class="string">&quot;------&quot;</span>+m.group()+<span class="string">&quot;------&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;结束位置：&quot;</span>+m.end()); <span class="comment">//end方法返回符合规则的子串的结束位置加1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>关于find方法：find方法通过循环调用，可以去遍历整个字符串，找出符合规则的全部内容或者说子串，每一次可以通过group()方法返回当前找到的符合规则的子串。find方法也可以进行全文本匹配，只需在正则表达式中加上两个定界符就可以了。group方法在后面分组匹配的时候再讲。</li>
+</ul>
+<p>这样可以匹配出两个结果：</p>
+<pre><code>起始位置：5------java------结束位置：9
+起始位置：18------java------结束位置：22
+</code></pre><p>像<code>&quot;java&quot;</code>这样直接给出明确字符的正则表达式去匹配明确内容的情况，我们叫做精确匹配。</p>
+<h3 id="模糊匹配"><a href="#模糊匹配" class="headerlink" title="模糊匹配"></a>模糊匹配</h3><p>精确匹配在实际应用中用处不大，因为String类本身就提供了equals方法实现了精确匹配的功能。而且大多数情况下，我们想要进行的是模糊匹配，也就是<strong>可以匹配任意字符，也可以匹配限定任意个数的任意字符</strong>。</p>
+<p>在模糊匹配下，我们只是给字符串设立了一个规则，在满足这个规则的前提下，我们匹配出的字符有多少个我们并不知道，比如上面那个电话号码的例子，我们可以重新设立必须以3~8个数字结尾的规则，那这样我们匹配成功的字符串，可能是以5个数字结尾的，也可能是以6个数字结尾的。</p>
+<p>这时候我们就需要使用正则表达式的元字符的功能。</p>
+<h2 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h2><p>我们需要一些特殊字符去匹配一个任意字符，下面列出一些常用的元字符和它们的功能：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\</td>
+<td>将后一个字符转义，例如，’n’匹配字符’n’，而’\n’匹配一个换行符。’\\‘匹配’\‘，’\(‘则匹配 ‘(‘</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除换行回车符（\n,\r）之外的一个任意字符</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>匹配一个换行符</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>匹配一个回车符</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>匹配一个制表符</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配一个任意的数字字符</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配一个任意的非数字字符</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>即word，匹配一个任意的字母或数字或下划线字符</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配一个任意的非字母、数字、下划线的字符</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配一个任意的空白字符，包括空格，换行回车符，制表符等等</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配一个任意的非空白字符</td>
+</tr>
+<tr>
+<td>\un</td>
+<td>匹配一个Unicode字符，其中n由四位十六进制数组成</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>容易发现，元字符的大小写功能完全相反。</strong> 我们可以用java代码测试一下这些元字符：</p>
+<p>待匹配的字符串：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">context</span> <span class="operator">=</span> <span class="string">&quot;我I&#x27;am java, I love java, I&#x27;m 25.&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>不同的正则表达式（注意转义问题）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;我&quot;</span>; <span class="comment">//因为这里匹配的是中文，正则表达式也可以写成对应的Unicode字符编码</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">while</span>(m.find())&#123;</span><br><span class="line">    System.out.print(<span class="string">&quot;起始位置：&quot;</span>+m.start());</span><br><span class="line">    System.out.print(<span class="string">&quot;------&quot;</span>+m.group()+<span class="string">&quot;------&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;结束位置：&quot;</span>+m.end());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    起始位置：0------我------结束位置：1</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;\\n&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    无匹配结果</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;\\s&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    起始位置：5------ ------结束位置：6</span></span><br><span class="line"><span class="comment">    起始位置：11------ ------结束位置：12</span></span><br><span class="line"><span class="comment">    起始位置：13------ ------结束位置：14</span></span><br><span class="line"><span class="comment">    起始位置：18------ ------结束位置：19</span></span><br><span class="line"><span class="comment">    起始位置：24------ ------结束位置：25</span></span><br><span class="line"><span class="comment">    起始位置：28------ ------结束位置：29</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;\\S&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    起始位置：0------我------结束位置：1</span></span><br><span class="line"><span class="comment">    起始位置：1------I------结束位置：2</span></span><br><span class="line"><span class="comment">    起始位置：2------&#x27;------结束位置：3</span></span><br><span class="line"><span class="comment">    起始位置：3------a------结束位置：4</span></span><br><span class="line"><span class="comment">    起始位置：4------m------结束位置：5</span></span><br><span class="line"><span class="comment">    起始位置：6------j------结束位置：7</span></span><br><span class="line"><span class="comment">    起始位置：7------a------结束位置：8</span></span><br><span class="line"><span class="comment">    起始位置：8------v------结束位置：9</span></span><br><span class="line"><span class="comment">    起始位置：9------a------结束位置：10</span></span><br><span class="line"><span class="comment">    起始位置：10------,------结束位置：11</span></span><br><span class="line"><span class="comment">    起始位置：12------I------结束位置：13</span></span><br><span class="line"><span class="comment">    起始位置：14------l------结束位置：15</span></span><br><span class="line"><span class="comment">    起始位置：15------o------结束位置：16</span></span><br><span class="line"><span class="comment">    起始位置：16------v------结束位置：17</span></span><br><span class="line"><span class="comment">    起始位置：17------e------结束位置：18</span></span><br><span class="line"><span class="comment">    起始位置：19------j------结束位置：20</span></span><br><span class="line"><span class="comment">    起始位置：20------a------结束位置：21</span></span><br><span class="line"><span class="comment">    起始位置：21------v------结束位置：22</span></span><br><span class="line"><span class="comment">    起始位置：22------a------结束位置：23</span></span><br><span class="line"><span class="comment">    起始位置：23------,------结束位置：24</span></span><br><span class="line"><span class="comment">    起始位置：25------I------结束位置：26</span></span><br><span class="line"><span class="comment">    起始位置：26------&#x27;------结束位置：27</span></span><br><span class="line"><span class="comment">    起始位置：27------m------结束位置：28</span></span><br><span class="line"><span class="comment">    起始位置：29------2------结束位置：30</span></span><br><span class="line"><span class="comment">    起始位置：30------5------结束位置：31</span></span><br><span class="line"><span class="comment">    起始位置：31------.------结束位置：32</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;\\w&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    起始位置：1------I------结束位置：2</span></span><br><span class="line"><span class="comment">    起始位置：3------a------结束位置：4</span></span><br><span class="line"><span class="comment">    起始位置：4------m------结束位置：5</span></span><br><span class="line"><span class="comment">    起始位置：6------j------结束位置：7</span></span><br><span class="line"><span class="comment">    起始位置：7------a------结束位置：8</span></span><br><span class="line"><span class="comment">    起始位置：8------v------结束位置：9</span></span><br><span class="line"><span class="comment">    起始位置：9------a------结束位置：10</span></span><br><span class="line"><span class="comment">    起始位置：12------I------结束位置：13</span></span><br><span class="line"><span class="comment">    起始位置：14------l------结束位置：15</span></span><br><span class="line"><span class="comment">    起始位置：15------o------结束位置：16</span></span><br><span class="line"><span class="comment">    起始位置：16------v------结束位置：17</span></span><br><span class="line"><span class="comment">    起始位置：17------e------结束位置：18</span></span><br><span class="line"><span class="comment">    起始位置：19------j------结束位置：20</span></span><br><span class="line"><span class="comment">    起始位置：20------a------结束位置：21</span></span><br><span class="line"><span class="comment">    起始位置：21------v------结束位置：22</span></span><br><span class="line"><span class="comment">    起始位置：22------a------结束位置：23</span></span><br><span class="line"><span class="comment">    起始位置：25------I------结束位置：26</span></span><br><span class="line"><span class="comment">    起始位置：27------m------结束位置：28</span></span><br><span class="line"><span class="comment">    起始位置：29------2------结束位置：30</span></span><br><span class="line"><span class="comment">    起始位置：30------5------结束位置：31</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;\\d&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    起始位置：29------2------结束位置：30</span></span><br><span class="line"><span class="comment">    起始位置：30------5------结束位置：31</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="匹配指定范围的字符"><a href="#匹配指定范围的字符" class="headerlink" title="匹配指定范围的字符"></a>匹配指定范围的字符</h3><p>正则表达式中有一类特殊的元字符，它可以用来匹配指定范围的字符，形式为：<code>[xyz]</code>。</p>
+<p><strong><code>[xyz]</code>表示一个字符集合，匹配其所包含的任意一个字符。它还有一种不包含的写法，如<code>[^x]</code>，匹配除字符x之外的任意一个字符</strong></p>
+<p>例如，<code>[abcdef]</code>可以匹配出”apple”中的’a’和’e’，<code>[123456789]</code>可以匹配出任意一个其中包含的数字字符，即1~9。</p>
+<p>但是这样把要匹配的字符一个一个写进去太麻烦了，有一些常用的简便写法如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>匹配范围</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[0-9]</td>
+<td>匹配一个0~9的数字字符，等价于元字符’\d’</td>
+</tr>
+<tr>
+<td>[^0-9]</td>
+<td>匹配一个非0~9的任意字符，等价于’\D’</td>
+</tr>
+<tr>
+<td>[a-z]</td>
+<td>匹配一个任意的小写字母字符</td>
+</tr>
+<tr>
+<td>[A-Z]</td>
+<td>匹配一个任意的大写字母字符</td>
+</tr>
+<tr>
+<td>[^a-z]</td>
+<td>匹配一个任意的非小写字母的字符</td>
+</tr>
+<tr>
+<td>[a-zA-Z0-9_]</td>
+<td>匹配一个小写或大写字母字符或数字字符或下划线，等价于’\w’</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>我们还是用上面的待匹配字符串测试一下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;[aj]&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    起始位置：3------a------结束位置：4</span></span><br><span class="line"><span class="comment">    起始位置：6------j------结束位置：7</span></span><br><span class="line"><span class="comment">    起始位置：7------a------结束位置：8</span></span><br><span class="line"><span class="comment">    起始位置：9------a------结束位置：10</span></span><br><span class="line"><span class="comment">    起始位置：19------j------结束位置：20</span></span><br><span class="line"><span class="comment">    起始位置：20------a------结束位置：21</span></span><br><span class="line"><span class="comment">    起始位置：22------a------结束位置：23</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">String re=<span class="string">&quot;[0-9]&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    起始位置：29------2------结束位置：30</span></span><br><span class="line"><span class="comment">    起始位置：30------5------结束位置：31</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h3><p>前面写的正则表达式中，不管是明确的字符’a’，还是元字符’\w’，它们在表达式中出现一次就代表匹配一次，在匹配成功出来的内容或者说子串中出现一次这个字符。例如，表达式”a\wc”，代表要匹配出的内容中有3个字符，可能是”abc”或者”a6c”或者”a_c”，这些字符串都符合规则。</p>
+<p>还有一类特殊的元字符，可以用来指定正则表达式中前一个字符或者子表达式的匹配次数，有下面三种：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>限定符</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>匹配前面的一个字符或子表达式零次或多次。例如，”zo*”能匹配出”z”、”zo”以及”zoooooo”</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前面的一个字符或子表达式零次或一次。例如，”do(es)?”可以匹配出”do”或”does”</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的一个字符或子表达式一次或多次。例如，”zo+”能匹配出”zo”以及”zoo”，但不能匹配出”z”，即至少匹配一次</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>我们还是用上面的待匹配字符串测试一下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;\\w+&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    起始位置：1------I------结束位置：2</span></span><br><span class="line"><span class="comment">    起始位置：3------am------结束位置：5</span></span><br><span class="line"><span class="comment">    起始位置：6------java------结束位置：10</span></span><br><span class="line"><span class="comment">    起始位置：12------I------结束位置：13</span></span><br><span class="line"><span class="comment">    起始位置：14------love------结束位置：18</span></span><br><span class="line"><span class="comment">    起始位置：19------java------结束位置：23</span></span><br><span class="line"><span class="comment">    起始位置：25------I------结束位置：26</span></span><br><span class="line"><span class="comment">    起始位置：27------m------结束位置：28</span></span><br><span class="line"><span class="comment">    起始位置：29------25------结束位置：31</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以看出跟上面单独一个正则表达式<code>\w</code>的例子匹配出来的结果不同，这里相当于把字符串切分了（忽略中文）。没错，你可能已经联想到了，正则表达式还可以用来切分字符串，而且比一般编程语言里面自带的切分字符串的方法更加强大，灵活。这里只是简单提一下，这篇博客并不会深入去讲。</li>
+</ul>
+<p>限定符还有另外一种写法，形式如下面几种：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>限定符</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{n}</td>
+<td>n是一个非负整数，匹配前面的一个字符或子表达式n次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>匹配前面的一个字符或子表达式n次或多次，即至少匹配n次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>m和n均为非负整数，其中n&lt;=m。匹配前面的一个字符或子表达式最少n次，最多m次</td>
+</tr>
+<tr>
+<td>{1,}</td>
+<td>等价于限定符 +</td>
+</tr>
+<tr>
+<td>{0,1}</td>
+<td>等价于 ？</td>
+</tr>
+<tr>
+<td>{0,}</td>
+<td>等价于 *</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>我们还是用上面的待匹配字符串测试一下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;\\d&#123;0,&#125;&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    起始位置：0------------结束位置：0</span></span><br><span class="line"><span class="comment">    起始位置：1------------结束位置：1</span></span><br><span class="line"><span class="comment">    起始位置：2------------结束位置：2</span></span><br><span class="line"><span class="comment">    起始位置：3------------结束位置：3</span></span><br><span class="line"><span class="comment">    起始位置：4------------结束位置：4</span></span><br><span class="line"><span class="comment">    起始位置：5------------结束位置：5</span></span><br><span class="line"><span class="comment">    起始位置：6------------结束位置：6</span></span><br><span class="line"><span class="comment">    起始位置：7------------结束位置：7</span></span><br><span class="line"><span class="comment">    起始位置：8------------结束位置：8</span></span><br><span class="line"><span class="comment">    起始位置：9------------结束位置：9</span></span><br><span class="line"><span class="comment">    起始位置：10------------结束位置：10</span></span><br><span class="line"><span class="comment">    起始位置：11------------结束位置：11</span></span><br><span class="line"><span class="comment">    起始位置：12------------结束位置：12</span></span><br><span class="line"><span class="comment">    起始位置：13------------结束位置：13</span></span><br><span class="line"><span class="comment">    起始位置：14------------结束位置：14</span></span><br><span class="line"><span class="comment">    起始位置：15------------结束位置：15</span></span><br><span class="line"><span class="comment">    起始位置：16------------结束位置：16</span></span><br><span class="line"><span class="comment">    起始位置：17------------结束位置：17</span></span><br><span class="line"><span class="comment">    起始位置：18------------结束位置：18</span></span><br><span class="line"><span class="comment">    起始位置：19------------结束位置：19</span></span><br><span class="line"><span class="comment">    起始位置：20------------结束位置：20</span></span><br><span class="line"><span class="comment">    起始位置：21------------结束位置：21</span></span><br><span class="line"><span class="comment">    起始位置：22------------结束位置：22</span></span><br><span class="line"><span class="comment">    起始位置：23------------结束位置：23</span></span><br><span class="line"><span class="comment">    起始位置：24------------结束位置：24</span></span><br><span class="line"><span class="comment">    起始位置：25------------结束位置：25</span></span><br><span class="line"><span class="comment">    起始位置：26------------结束位置：26</span></span><br><span class="line"><span class="comment">    起始位置：27------------结束位置：27</span></span><br><span class="line"><span class="comment">    起始位置：28------------结束位置：28</span></span><br><span class="line"><span class="comment">    起始位置：29------25------结束位置：31</span></span><br><span class="line"><span class="comment">    起始位置：31------------结束位置：31</span></span><br><span class="line"><span class="comment">    起始位置：32------------结束位置：32</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里匹配出许多空字符，是因为<code>&#123;0,&#125;</code>就相当于<code>*</code>，两者都可以指定匹配前面的一个字符或子表达式零次或多次。所以在字符串中，遇到非数字字符，就相当于正则表达式用<code>\d</code>匹配了零次，这种规则下当然就匹配出了空字符，也当成结果返回。</li>
+</ul>
+<h2 id="贪婪匹配和非贪婪匹配"><a href="#贪婪匹配和非贪婪匹配" class="headerlink" title="贪婪匹配和非贪婪匹配"></a>贪婪匹配和非贪婪匹配</h2><h3 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h3><p>在上面的一个例子中，正则表达式<code>\w+</code>相当于把字符串切分了，从这里可以看出，在正则表达式中，在一个字符或子表达式后面加上限定符后，默认进行的是贪婪匹配，也就是说，在这个例子的匹配的过程中，正则表达式遇到一个<code>\w</code>代表的字符后，其实它已经满足了限定符<code>+</code>指定的至少一次的匹配次数，但它还不满足，想要继续匹配下去，直到遇到非字母，非数字，非下划线的字符才停止这次匹配。之后它会跳过这些不符合规则的字符，去后面继续匹配出符合规则的字符。所以这就是为什么，这个例子中的字符串看上去是以空格、逗号进行切分的。</p>
+<p>我们还是以<code>我I&#39;am java, I love java, I&#39;m 25.</code>这个字符串进行举例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;.*java&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    起始位置：0------我I&#x27;am java, I love java------结束位置：23</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以看出，即使中间已经出现了java这个字符串，前面也是符合<code>.*</code>的字符串，也就是说<code>我I&#39;am java</code>这个子串已经符合正则表达式的规则了。但它还是会继续匹配下去，直到匹配出最后一个java字符串为止，因为<code>我I&#39;am java, I love java</code>这个子串也符合规则，那它就要“贪婪“一点。</li>
+</ul>
+<p><strong>贪婪匹配就是尽可能多的匹配出符合规则的内容。</strong></p>
+<h3 id="非贪婪匹配"><a href="#非贪婪匹配" class="headerlink" title="非贪婪匹配"></a>非贪婪匹配</h3><p><strong>非贪婪匹配也称惰性匹配，只要在一个限定符后面加上一个<code>?</code>就可以进行惰性匹配了。</strong></p>
+<p>我们还是以<code>我I&#39;am java, I love java, I&#39;m 25.</code>这个字符串进行举例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;.*?java&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    起始位置：0------我I&#x27;am java------结束位置：10</span></span><br><span class="line"><span class="comment">    起始位置：10------, I love java------结束位置：23</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以看出，非贪婪匹配只要匹配出了符合规则的内容就进行返回，即去匹配尽可能少的内容。</li>
+</ul>
+<h2 id="分组匹配"><a href="#分组匹配" class="headerlink" title="分组匹配"></a>分组匹配</h2><p><strong><code>()</code>在正则表达式中有一个重要的作用，就是进行分组匹配。分组匹配的功能就是在一个匹配出的符合正则表达式规则的字符串中，提取特定子串出来。</strong></p>
+<ul>
+<li>在java中，通过<code>Matcher.group(index)</code>方法提取子串：<ul>
+<li>group()与group(0)等价，返回的是整个正则表达式匹配出的内容</li>
+<li>group(i)返回的是正则表达式中从左往右数第i个分组里的内容</li>
+<li>分组就是正则表达式中用<code>()</code>括起来的子表达式</li>
+</ul>
+</li>
+</ul>
+<p>我们来看下面两个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        String context=<span class="string">&quot;&lt;a href=\&quot;zunhuier.club\&quot;&gt;zunhuier&#x27;s&lt;/a&gt;...&lt;a href=\&quot;http://zunhuier.club\&quot;&gt;博客&lt;/a&gt;&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;&lt;a href=\&quot;(.*?)\&quot;&gt;(.*?)&lt;/a&gt;&quot;</span>;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(re);</span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(context);</span><br><span class="line">        <span class="keyword">while</span>(m.find())&#123;</span><br><span class="line">            System.out.print(<span class="string">&quot;起始位置：&quot;</span>+m.start());</span><br><span class="line">            System.out.print(<span class="string">&quot;------&quot;</span>+m.group(<span class="number">0</span>)+<span class="string">&quot;------&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;结束位置：&quot;</span>+m.end());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    起始位置：0------&lt;a href=&quot;zunhuier.club&quot;&gt;zunhuier&#x27;s&lt;/a&gt;------结束位置：38</span></span><br><span class="line"><span class="comment">    起始位置：41------&lt;a href=&quot;http://zunhuier.club&quot;&gt;博客&lt;/a&gt;------结束位置：78</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        String context=<span class="string">&quot;&lt;a href=\&quot;zunhuier.club\&quot;&gt;zunhuier&#x27;s&lt;/a&gt;...&lt;a href=\&quot;http://zunhuier.club\&quot;&gt;博客&lt;/a&gt;&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">re</span> <span class="operator">=</span> <span class="string">&quot;&lt;a href=\&quot;(.*?)\&quot;&gt;(.*?)&lt;/a&gt;&quot;</span>;</span><br><span class="line">        <span class="type">Pattern</span> <span class="variable">p</span> <span class="operator">=</span> Pattern.compile(re);</span><br><span class="line">        <span class="type">Matcher</span> <span class="variable">m</span> <span class="operator">=</span> p.matcher(context);</span><br><span class="line">        <span class="keyword">while</span>(m.find())&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m.groupCount();i++)&#123; <span class="comment">//groupCount方法返回正则表达式中的分组个数</span></span><br><span class="line">                System.out.print(<span class="string">&quot;起始位置：&quot;</span>+m.start());</span><br><span class="line">                System.out.print(<span class="string">&quot;------&quot;</span>+m.group(i)+<span class="string">&quot;------&quot;</span>);</span><br><span class="line">                System.out.print(<span class="string">&quot;结束位置：&quot;</span>+m.end());</span><br><span class="line">                System.out.print(<span class="string">&quot;      &quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    起始位置：0------zunhuier.club------结束位置：38      起始位置：0------zunhuier&#x27;s------结束位置：38      </span></span><br><span class="line"><span class="comment">    起始位置：41------http://zunhuier.club------结束位置：78      起始位置：41------博客------结束位置：78</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>正则表达式非常强大，在一篇博客中是讲不完的，这篇博客只是简单的入门正则表达式。我们只需记住正则表达式可以用来匹配字符串中的特定内容就行了。</p>
+<h2 id="在线正则表达式测试网站"><a href="#在线正则表达式测试网站" class="headerlink" title="在线正则表达式测试网站"></a>在线正则表达式测试网站</h2><p>这里推荐一个正则表达式的在线测试<a target="_blank" rel="noopener" href="https://regexr.com">网站</a>：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/shallowhui/cdn/img/regularexpression/reonline.png" alt="在线正则表达式测试"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://zunhuier.top">zunhuier</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zunhuier.top/posts/46563/">https://zunhuier.top/posts/46563/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zunhuier.top" target="_blank">zunhuier's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/re.jpg" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/pay/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/pay/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/pay/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/pay/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/45668/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/mac.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">macOS下用zsh配置环境变量</div></div></a></div><div class="next-post pull-right"><a href="/posts/64035/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/python.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Python的高级特性</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E4%B8%AD%E6%94%AF%E6%8C%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E7%B1%BB%E5%BA%93"><span class="toc-number">2.</span> <span class="toc-text">Java中支持正则表达式的类库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%98%AF%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">3.</span> <span class="toc-text">正则表达式是一个字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E6%96%87%E6%9C%AC%E5%8C%B9%E9%85%8D"><span class="toc-number">3.1.</span> <span class="toc-text">全文本匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B2%BE%E7%A1%AE%E5%8C%B9%E9%85%8D"><span class="toc-number">3.2.</span> <span class="toc-text">精确匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E7%B3%8A%E5%8C%B9%E9%85%8D"><span class="toc-number">3.3.</span> <span class="toc-text">模糊匹配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E5%AD%97%E7%AC%A6"><span class="toc-number">4.</span> <span class="toc-text">元字符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%B9%E9%85%8D%E6%8C%87%E5%AE%9A%E8%8C%83%E5%9B%B4%E7%9A%84%E5%AD%97%E7%AC%A6"><span class="toc-number">4.1.</span> <span class="toc-text">匹配指定范围的字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="toc-number">4.2.</span> <span class="toc-text">限定符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%AA%E5%A9%AA%E5%8C%B9%E9%85%8D%E5%92%8C%E9%9D%9E%E8%B4%AA%E5%A9%AA%E5%8C%B9%E9%85%8D"><span class="toc-number">5.</span> <span class="toc-text">贪婪匹配和非贪婪匹配</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%AA%E5%A9%AA%E5%8C%B9%E9%85%8D"><span class="toc-number">5.1.</span> <span class="toc-text">贪婪匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E8%B4%AA%E5%A9%AA%E5%8C%B9%E9%85%8D"><span class="toc-number">5.2.</span> <span class="toc-text">非贪婪匹配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E5%8C%B9%E9%85%8D"><span class="toc-number">6.</span> <span class="toc-text">分组匹配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E7%BA%BF%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B5%8B%E8%AF%95%E7%BD%91%E7%AB%99"><span class="toc-number">8.</span> <span class="toc-text">在线正则表达式测试网站</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: black"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By zunhuier</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://zunhuier.top">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://ttz.zeabur.app',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://ttz.zeabur.app',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="2278581987" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

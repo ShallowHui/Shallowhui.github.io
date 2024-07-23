@@ -1,0 +1,456 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>SpringMVC入门 | zunhuier's blog</title><meta name="keywords" content="Spring,SpringMVC"><meta name="author" content="zunhuier"><meta name="copyright" content="zunhuier"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Spring是SSM框架的基石，而Spring本身提供的SpringMVC则是实现MVC设计模式的轻量级框架，我们可以用SpringMVC来开发MVC的控制层。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMVC入门">
+<meta property="og:url" content="https://zunhuier.top/posts/13031/index.html">
+<meta property="og:site_name" content="zunhuier&#39;s blog">
+<meta property="og:description" content="Spring是SSM框架的基石，而Spring本身提供的SpringMVC则是实现MVC设计模式的轻量级框架，我们可以用SpringMVC来开发MVC的控制层。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/spring.png">
+<meta property="article:published_time" content="2020-10-14T07:50:12.000Z">
+<meta property="article:modified_time" content="2024-07-23T10:03:00.744Z">
+<meta property="article:author" content="zunhuier">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="SpringMVC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/spring.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://zunhuier.top/posts/13031/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-j854Y0rH6C"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-right"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SpringMVC入门',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-23 18:03:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">33</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于&amp;留言</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/spring.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zunhuier's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于&amp;留言</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SpringMVC入门</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2020-10-14T07:50:12.000Z" title="发表于 2020-10-14 15:50:12">2020-10-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="SpringMVC入门"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/13031/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>MVC</code>这个著名的设计模式想必大家都很了解，在此不再赘述。</p>
+<p>在传统的JavaWeb开发过程中，MVC的<code>C</code>层，也就是控制层，是用<code>servlet</code>技术开发的，servlet技术也的确是JavaWeb后端的基础，需要好好掌握。</p>
+<p>而SpringMVC正是基于servlet技术，对servlet进行了封装的一个框架，本质上还是servlet技术。SpringMVC可以帮我们大大简化之前servlet开发模式的流程，它提供了一个前端控制器用于统一接收请求，不用我们自己去配置每个servlet映射的请求了，并且SpringMVC支持多种视图技术，不再仅限于JSP技术。</p>
+<p>SpringMVC还有很多优点，下面简单介绍如何引入框架和其工作原理。</p>
+<h2 id="引入SpringMVC"><a href="#引入SpringMVC" class="headerlink" title="引入SpringMVC"></a>引入SpringMVC</h2><p>首先导入框架的依赖包，除了Spring的核心包之外，还要导入两个包：</p>
+<ul>
+<li><p>spring-web.jar</p>
+</li>
+<li><p>spring-webmvc.jar</p>
+</li>
+</ul>
+<p>推荐通过<code>Maven</code>把依赖包导入项目中，maven的使用可以参考我的这篇文章：<a href="https://zunhuier.top/posts/37716/">Maven基础</a></p>
+<p>配置<code>web.xml</code>文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置SpringMVC前端核心控制器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>SpringMVC<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 指明SpringMVC的配置文件在哪 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:springmvc-config.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 配置服务器启动后立即加载SpringMVC配置文件 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>0<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>SpringMVC<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- /:拦截所有请求，除了带.xxx文件后缀的请求 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置SpringMVC自带的编码过滤器，拦截所有请求 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param-value</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>从上面的配置就可以看出SpringMVC是基于servlet技术的，<code>DispatcherServlet</code>就是框架提供的一个前端控制器，它可以帮我们接收请求，我们只需编写处理请求的代码即可，也就是后端控制器。换句话说，SpringMVC对servlet的功能进行了分离，前端控制器负责接收请求，后端控制器负责处理请求。</strong></p>
+<p>接着创建SpringMVC的配置文件，一般命名为<code>springmvc-config.xml</code>，放在类目录的根路径下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:mvc</span>=<span class="string">&quot;http://www.springframework.org/schema/mvc&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:tx</span>=<span class="string">&quot;http://www.springframework.org/schema/tx&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/mvc</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/mvc/spring-mvc.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置包扫描器，扫描controller层 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;edu.gduf.controller&quot;</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 加载注解驱动 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:annotation-driven</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 配置视图解析器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 定义视图的前缀和后缀 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;prefix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/jsp/&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suffix&quot;</span> <span class="attr">value</span>=<span class="string">&quot;.jsp&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>&lt;component-scan&gt;</code>标签是搭配注解使用的，在SpringMVC框架中编写处理请求的代码有两种方式，一个是实现SpringMVC的核心后端控制器类，一个就是注解开发，这些在后面都会提及。</li>
+</ul>
+<h2 id="SpirngMVC的工作原理"><a href="#SpirngMVC的工作原理" class="headerlink" title="SpirngMVC的工作原理"></a>SpirngMVC的工作原理</h2><p><code>DispatcherServlet</code>前端控制器是SpringMVC的核心类，其在框架的架构中就相当于坐镇中央进行调度，当其接收到一个请求时，就会进行如下工作流程：</p>
+<ol>
+<li><p>用户向服务器发送一个请求，请求会被前端控制器按照配置的规则拦截。</p>
+</li>
+<li><p>前端控制器收到请求后，就会调用<code>HandlerMapping</code>即处理器映射器。</p>
+</li>
+<li><p>处理器映射器会根据请求的URL找到具体的<code>处理器</code>也就是我们编写的后端控制器，生成处理器对象，如果有配置拦截器的话，就会把拦截器对象和处理器对象一起返回给前端控制器。</p>
+</li>
+<li><p>前端控制器根据收到的处理器，选择合适的<code>HandlerAdapter</code>即处理器适配器。</p>
+</li>
+<li><p>处理器适配器调用处理器，对请求进行处理。</p>
+</li>
+<li><p>处理器处理完后，会返回一个<code>ModelAndView</code>对象给处理器适配器，处理器适配器又会把这个对象返回给前端控制器。</p>
+</li>
+<li><p>前端控制器根据收到的<code>ModelAndView</code>对象，选择一个合适的<code>ViewReslover</code>即视图解析器。</p>
+</li>
+<li><p>视图解析器进行解析后，根据处理器中要返回给用户的<code>视图</code>，会向前端控制器返回一个具体的视图（比如说JSP模板）。</p>
+</li>
+<li><p>前端控制器得到具体的视图后，就会对视图进行渲染，即把数据填充至视图中。</p>
+</li>
+<li><p>最后前端控制器就会把渲染好的视图返回给浏览器客户端。</p>
+</li>
+</ol>
+<p><strong>上面进行标记的都是SpringMVC的核心组件、核心类。</strong></p>
+<ul>
+<li>SpringMVC自带一些常用的拦截器，比如上面配置<code>web.xml</code>时配置的一个编码过滤器，我们也可以自定义一个拦截器。SpringMVC的拦截器就类似于servlet的<code>filter</code>，这篇文章就不对其进行展开了。</li>
+</ul>
+<h3 id="实现Controller接口开发后端控制器"><a href="#实现Controller接口开发后端控制器" class="headerlink" title="实现Controller接口开发后端控制器"></a>实现Controller接口开发后端控制器</h3><p>根据上面的SpringMVC工作流程，我们只需编写处理请求的后端控制器就行了。</p>
+<p>我们定义一个类，实现<code>org.springframework.web.servlet.mvc.Controller</code>接口，然后实现接口定义的方法<code>handleRequest()</code>。在方法中，我们对请求进行处理，比如通过<code>HttpServletRequest</code>对象，保存要向视图填充的数据，然后指定要返回的JSP视图，最后返回一个<code>ModelAndView</code>对象。</p>
+<p>然后在<code>springmvc-config.xml</code>配置文件中，将这个后端控制器作为一个Bean进行配置，主要配置控制器映射的请求。</p>
+<p>听起来是不是和servlet开发模式中，要实现doGet()或者doPost()方法差不多？事实上也大致如此，像servlet中内置的request、response、session等对象在SpringMVC中都一样可以使用。</p>
+<p>大致介绍完实现接口的开发方式，本质上和servlet开发模式并没有太大的区别，在实际开发中当然不用这种方式，而是使用注解进行开发。</p>
+<h3 id="注解开发"><a href="#注解开发" class="headerlink" title="注解开发"></a>注解开发</h3><p>使用注解开发有很多好处：</p>
+<ul>
+<li><p>不再需要实现接口，只需在一个类上加一个<code>@Controller</code>注解，即可将这个类定义为后端控制器，然后配置Spring注解扫描器即可扫描到这个类。</p>
+</li>
+<li><p>相比于接口实现类只能处理单一请求相比，使用注解的后端控制器可以通过<code>@RequestMapping</code>注解处理若干个请求。</p>
+</li>
+</ul>
+<p>注解开发的模板如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HandleController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(value=&quot;/请求路径&quot;)</span>  <span class="comment">//value属性用来指明这个方法映射的请求，当只有这个属性时，属性名可以省略</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">handleMethod</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> &#123;</span><br><span class="line"></span><br><span class="line">        ... <span class="comment">//处理请求的代码</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;view.jsp&quot;</span>; <span class="comment">//指明返回的视图，当在SpringMVC的配置文件中配置好了视图解析器后，可以不用加视图文件的前后缀</span></span><br><span class="line">        <span class="comment">// return &quot;view&quot;;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/请求路径&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ModelAndView <span class="title function_">handleMethod</span><span class="params">(...)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">ModelAndView</span> <span class="variable">mav</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ModelAndView</span>();</span><br><span class="line"></span><br><span class="line">        ... <span class="comment">//处理请求的代码</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> mav;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>@RequestMapping</code>注解部分属性如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>属性值描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>映射请求的地址，以项目根目录为根路径。当只有这个属性时，属性名可以省略。可以定义多个映射路径，如@RequestMapping(“/{firstrequest,secondrequest}”)</td>
+</tr>
+<tr>
+<td>method</td>
+<td>指定方法用于处理什么类型的请求，如@RequestMapping(method={RequestMethod.GET,RequestMethod.POST})</td>
+</tr>
+<tr>
+<td>params</td>
+<td>指定请求中必须包含哪些参数和其值，多个参数以<code>&#123;&#125;</code>数组形式指定</td>
+</tr>
+<tr>
+<td>headers</td>
+<td>指定请求头中必须包含哪些参数和其值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong><code>@RequestMapping</code>注解可以加在方法上，也可以加在类上。加在类上并指明value属性，就相当于这个后端控制器类中的所有处理请求的方法，在自身的请求路径前面再加了一个统一的前缀路径。</strong></li>
+</ul>
+<h4 id="请求处理方法的返回类型和参数"><a href="#请求处理方法的返回类型和参数" class="headerlink" title="请求处理方法的返回类型和参数"></a>请求处理方法的返回类型和参数</h4><p>返回类型一般有ModelAndView、String、void。ModelAndView类型可以向SpringMVC提供的model对象中添加数据，并指定视图。但添加数据完全可以通过servlet的request等对象完成，所以一般都返回的是String类型，直接指明要返回的视图名字。</p>
+<p>方法参数可以自定义，可以没有，也可以自己指定跟请求相关的参数。比如，servlet的request等对象。比如前端发来的请求参数，这涉及到数据绑定，后面会讲。</p>
+<h4 id="请求重定向和请求转发"><a href="#请求重定向和请求转发" class="headerlink" title="请求重定向和请求转发"></a>请求重定向和请求转发</h4><p>返回类型为String可以进行请求的重定向和转发：</p>
+<ul>
+<li><p>重定向：return “redirect: 视图名字或者别的请求处理方法的请求路径”;</p>
+</li>
+<li><p>转发：return “forward: 视图名字或者别的请求处理方法的请求路径”;</p>
+</li>
+</ul>
+<h4 id="RequestBody和-ResponseBody注解"><a href="#RequestBody和-ResponseBody注解" class="headerlink" title="@RequestBody和@ResponseBody注解"></a>@RequestBody和@ResponseBody注解</h4><p>在实际开发中，有一些请求是在前端中通过<code>ajax</code>发往后端的，携带的可能是JSON格式的数据。</p>
+<p>这两个注解就是用来处理JSON格式的数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/请求路径&quot;)</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="keyword">public</span> Object <span class="title function_">handleMethod</span><span class="params">(<span class="meta">@RequestBody</span> Object object)</span> &#123;</span><br><span class="line"></span><br><span class="line">    ... <span class="comment">//处理请求的代码</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> object;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>@RequestBody</code>注解加在请求参数前面，指明将请求中的JSON格式数据转化为一个Java对象绑定到请求参数中。</p>
+<p><code>@ResponseBody</code>注解加在请求处理方法上，用于将方法返回的对象转化为JSON格式数据以对客户端进行响应。</p>
+<h2 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h2><p><strong>在SpringMVC的后端控制器中，SpringMVC会根据接收到的请求中的参数信息，以一定的方式将其进行转换并绑定到请求处理方法的参数中，这就是数据绑定。</strong></p>
+<h3 id="数据绑定的工作原理"><a href="#数据绑定的工作原理" class="headerlink" title="数据绑定的工作原理"></a>数据绑定的工作原理</h3><ol>
+<li><p>在Web容器中，SpringMVC会把一个封装了请求信息的ServletRequest对象传递给<code>DataBinder</code>，还会将请求处理方法的<code>形参对象</code>也传递给<code>DataBinder</code>。</p>
+</li>
+<li><p>DataBinder调用<code>ConversionService</code>组件进行数据转换、数据格式化等工作，并在最后将ServletRequest对象信息中的数据绑定到代表请求参数的对象中。</p>
+</li>
+<li><p>SpringMVC调用<code>Validator</code>组件对绑定好的数据进行检验。</p>
+</li>
+<li><p>检验好后，返回一个<code>BindingResult</code>对象，里面封装好了数据绑定的结果。</p>
+</li>
+<li><p>最后SpringMVC就会根据BindingResult对象中的绑定结果去调用请求处理方法，并传入相应的数据。</p>
+</li>
+</ol>
+<h3 id="简单数据绑定"><a href="#简单数据绑定" class="headerlink" title="简单数据绑定"></a>简单数据绑定</h3><h4 id="默认绑定的数据"><a href="#默认绑定的数据" class="headerlink" title="默认绑定的数据"></a>默认绑定的数据</h4><ul>
+<li><p>HttpServletRequest：通过request对象获得请求中的信息。</p>
+</li>
+<li><p>HttpServletResponse：通过response处理响应信息。</p>
+</li>
+<li><p>HttpSession：通过session对象获取存储在<code>session域</code>中的信息。</p>
+</li>
+<li><p>Model/Model：SpringMVC提供的一个对象，作用是将model中的数据填充到request域。</p>
+</li>
+</ul>
+<h4 id="绑定简单数据类型"><a href="#绑定简单数据类型" class="headerlink" title="绑定简单数据类型"></a>绑定简单数据类型</h4><p>如果在请求中有一个简单的参数，那就可以通过如下数据绑定的方式即可获取到这个参数的值：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">api</span><span class="params">(<span class="type">int</span> id)</span> &#123;   <span class="comment">//请求处理方法名一般跟请求同名，但也无所谓</span></span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>发送请求<code>http://localhost:8080/projectname/api?id=1</code>到服务器，后端就可以直接、正确地接收到这个名为id的参数了。</p>
+<p>也就是说请求参数中的一些简单的数据类型，比如int，Sting，Double之类的数据，请求处理方法可以直接通过<code>同类型、同名</code>的参数直接接收请求参数。</p>
+<p>当然，有时请求中的参数名跟请求处理方法中的参数名不一样，为此SpringMVC提供了<code>@RequestParam</code>注解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">api</span><span class="params">(<span class="meta">@RequestParam(&quot;id&quot;)</span> <span class="type">int</span> userID)</span> &#123;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong><code>@RequestParam</code>注解的<code>required</code>属性还可以用来指定参数是否必须，因为SpringMVC默认简单数据类型的参数是不能为null的，比如int、double，而包装数据类型的参数是可以为null的，比如String，所以可以添加这个注解指明参数是必须的，不能不传，required属性默认为true。</strong></p>
+<h4 id="绑定实体类型"><a href="#绑定实体类型" class="headerlink" title="绑定实体类型"></a>绑定实体类型</h4><p>当请求中有多个简单数据类型的参数要传到后端时，如果这些参数都是用来描述一个实体的话，我们可以创建一个实体类，把请求参数都封装进去。然后在请求处理方法中，直接用这个实体类作为参数即可完成对这些请求参数的数据绑定：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">api</span><span class="params">(Object object)</span> &#123;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>SpringMVC会自动地把这些请求参数绑定到实体类对象中同名的成员属性。<strong>所以，请求实体类中的成员属性名字必须要跟请求参数名一致。</strong></p>
+<h4 id="绑定复合实体类型"><a href="#绑定复合实体类型" class="headerlink" title="绑定复合实体类型"></a>绑定复合实体类型</h4><p>如果绑定的实体类Object中有一个成员属性是另一个实体类ObjectA的对象objectA，则相应的请求参数名设置为<code>objectA.param</code>即可完成对Object对象中的ObjectA对象中的成员属性的数据绑定。</p>
+<h3 id="复杂数据绑定"><a href="#复杂数据绑定" class="headerlink" title="复杂数据绑定"></a>复杂数据绑定</h3><h4 id="绑定数组"><a href="#绑定数组" class="headerlink" title="绑定数组"></a>绑定数组</h4><p>当请求中有多个同名参数要传到后端时，比如在批量删除的请求中，多个用户的ID都以参数名为id的形式传到后端，可以通过数组的形式完成对这些同名请求参数的数据绑定：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">api</span><span class="params">(<span class="type">int</span>[] id)</span> &#123; <span class="comment">//通过遍历数组即可访问每一个参数具体的值了</span></span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="绑定集合"><a href="#绑定集合" class="headerlink" title="绑定集合"></a>绑定集合</h4><p>当要传多个实体到后端时，比如要传多个完整的用户对象，我们可以通过集合的形式完成数据绑定。</p>
+<p>首先定义一个包装类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserVo</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;User&gt; users;</span><br><span class="line"></span><br><span class="line">    ...  <span class="comment">//可以定义get、set方法</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后定义请求处理方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">api</span><span class="params">(UserVo userList)</span> &#123;</span><br><span class="line"></span><br><span class="line">    List&lt;User&gt; users = userList.getUsers(); <span class="comment">//通过get方法即可获得所有的用户对象了</span></span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>最后在请求参数中，注意要指明该参数属于集合中的第几个元素，如<code>users[index].username</code>即可。</p>
+<p>SpringMVC会自动地把相同序列的属性一同作为一个对象，绑定到集合中相应序列的元素中。</p>
+<h3 id="自定义数据绑定"><a href="#自定义数据绑定" class="headerlink" title="自定义数据绑定"></a>自定义数据绑定</h3><p>在一般情况下，上面的几种类型的数据绑定够用了，但有时会有一些数据绑定无效，比如下面的日期数据绑定。</p>
+<p>有一个请求<code>http://localhost:8080/projectname/api?date=2017-04-08</code>要发到后端，我们自己是知道date参数的数据类型是日期型的，但SpringMVC是不会把它当做日期型数据的，只会把它当作字符串来处理。</p>
+<p>如果在请求处理方法中定义<code>Date date</code>参数来接收date参数，是接收不到这个参数的，数据绑定无效，因为数据类型不同。</p>
+<p>这时我们就需要自定义一个类型转换器了(<code>Converter</code>)：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> club.zunhuier.converter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.text.ParseException;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.core.convert.converter.Converter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DateConverter</span> <span class="keyword">implements</span> <span class="title class_">Converter</span>&lt;String, Date&gt; &#123;  <span class="comment">//实现Converter接口</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 定义日期格式</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">String</span> <span class="variable">datePatternShort</span> <span class="operator">=</span> <span class="string">&quot;yyyy-MM-dd&quot;</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">String</span> <span class="variable">datePatternLong</span> <span class="operator">=</span> <span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//实现convert方法</span></span><br><span class="line">	<span class="keyword">public</span> Date <span class="title function_">convert</span><span class="params">(String source)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 格式化日期</span></span><br><span class="line">		<span class="type">String</span> <span class="variable">thePattern</span> <span class="operator">=</span> source.indexOf(<span class="string">&quot;:&quot;</span>) == -<span class="number">1</span> ? datePatternShort : datePatternLong;</span><br><span class="line">		<span class="type">SimpleDateFormat</span> <span class="variable">sdf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(thePattern);</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> sdf.parse(source);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (ParseException e) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;无效的日期格式，请使用这种格式:&quot;</span> + thePattern);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还要在SpringMVC配置文件中配置这个转换器：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置自定义类型的数据转换器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;myConversionService&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.context.support.ConversionServiceFactoryBean&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;converters&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;club.zunhuier.converter.DateConverter&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>配置好后即可完成日期类型的数据绑定了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>servlet和SpringMVC的开发模式是有很多共通之处的，需要我们好好掌握servlet。然后就是要熟练掌握SpringMVC的数据绑定，这样才能正常完成前后端的数据交互。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://zunhuier.top">zunhuier</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://zunhuier.top/posts/13031/">https://zunhuier.top/posts/13031/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://zunhuier.top" target="_blank">zunhuier's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Spring/">Spring</a><a class="post-meta__tags" href="/tags/SpringMVC/">SpringMVC</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/spring.png" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/pay/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/pay/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/pay/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn@master/pay/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/61849/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/jupyter.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">搭建远程Jupyter Notebook服务</div></div></a></div><div class="next-post pull-right"><a href="/posts/57237/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/frp.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">利用FRP实现内网穿透</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/63107/" title="Mybatis入门"><img class="cover" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/mybatis.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-23</div><div class="title">Mybatis入门</div></div></a></div><div><a href="/posts/35289/" title="Spring入门"><img class="cover" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/spring.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-21</div><div class="title">Spring入门</div></div></a></div><div><a href="/posts/63389/" title="Spring的AOP"><img class="cover" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/spring.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-20</div><div class="title">Spring的AOP</div></div></a></div><div><a href="/posts/7343/" title="Spring的IoC和DI"><img class="cover" src="https://cdn.jsdelivr.net/gh/shallowhui/cdn/top_img/spring.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-26</div><div class="title">Spring的IoC和DI</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%85%A5SpringMVC"><span class="toc-number">2.</span> <span class="toc-text">引入SpringMVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpirngMVC%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">SpirngMVC的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0Controller%E6%8E%A5%E5%8F%A3%E5%BC%80%E5%8F%91%E5%90%8E%E7%AB%AF%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-number">3.1.</span> <span class="toc-text">实现Controller接口开发后端控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91"><span class="toc-number">3.2.</span> <span class="toc-text">注解开发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95%E7%9A%84%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8F%82%E6%95%B0"><span class="toc-number">3.2.1.</span> <span class="toc-text">请求处理方法的返回类型和参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91"><span class="toc-number">3.2.2.</span> <span class="toc-text">请求重定向和请求转发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RequestBody%E5%92%8C-ResponseBody%E6%B3%A8%E8%A7%A3"><span class="toc-number">3.2.3.</span> <span class="toc-text">@RequestBody和@ResponseBody注解</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">4.</span> <span class="toc-text">数据绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">4.1.</span> <span class="toc-text">数据绑定的工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">4.2.</span> <span class="toc-text">简单数据绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E7%BB%91%E5%AE%9A%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">4.2.1.</span> <span class="toc-text">默认绑定的数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E7%AE%80%E5%8D%95%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.2.2.</span> <span class="toc-text">绑定简单数据类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.2.3.</span> <span class="toc-text">绑定实体类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E5%A4%8D%E5%90%88%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.2.4.</span> <span class="toc-text">绑定复合实体类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">4.3.</span> <span class="toc-text">复杂数据绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E6%95%B0%E7%BB%84"><span class="toc-number">4.3.1.</span> <span class="toc-text">绑定数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E9%9B%86%E5%90%88"><span class="toc-number">4.3.2.</span> <span class="toc-text">绑定集合</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">4.4.</span> <span class="toc-text">自定义数据绑定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background: black"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By zunhuier</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://zunhuier.top">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://ttz.zeabur.app',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://ttz.zeabur.app',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="2278581987" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
